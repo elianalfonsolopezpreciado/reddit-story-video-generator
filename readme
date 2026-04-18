@@ -4,19 +4,19 @@ Automatically creates TikTok-style videos from Reddit stories with dynamic text 
 
 ## Features
 
-- Auto Reddit Scraping - Pulls fresh stories from any subreddit
-- TikTok Voice - Uses Edge TTS "Jenny Neural" voice
-- Mobile Format - Perfect 9:16 vertical videos
-- Dynamic Text - One word at a time, yellow highlighting
-- Background Video - Your gameplay footage as background
-- No Duplicates - Tracks processed stories to avoid reuse
-- Batch Processing - Create multiple videos at once
+* **Auto Reddit Scraping:** Pulls fresh stories from any specified subreddit.
+* **TikTok Voice:** Utilizes the Edge TTS "Jenny Neural" voice for high-quality narration.
+* **Mobile Optimized:** Generates videos in a perfect 9:16 vertical aspect ratio.
+* **Dynamic Text:** Word-by-word captions with yellow highlighting for engagement.
+* **Background Integration:** Seamlessly overlays text and audio on your gameplay footage.
+* **Duplicate Prevention:** Integrated database to track and skip previously processed stories.
+* **Batch Processing:** Efficiently create multiple videos in a single execution.
 
 ## Quick Start
 
 ### 1. Clone Repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/munir-a-khan/reddit-story-video-generator
 cd reddit-video-generator
 ```
 
@@ -37,15 +37,15 @@ pip install -r requirements.txt
 ```
 
 ### 4. Setup Reddit API
-1. Go to [Reddit Apps](https://www.reddit.com/prefs/apps)
-2. Click "Create App" → "Script"
-3. Name: `Reddit Video Bot`
-4. Description: `Video generator`
-5. Redirect URI: `http://localhost:8000`
-6. Copy your **Client ID** and **Client Secret**
+1. Navigate to [Reddit Apps](https://www.reddit.com/prefs/apps).
+2. Click **"Create App"** → Select **"Script"**.
+3. **Name:** `Reddit Video Bot`
+4. **Description:** `Video generator`
+5. **Redirect URI:** `http://localhost:8000`
+6. Secure your **Client ID** and **Client Secret**.
 
 ### 5. Create Configuration File
-Create `config.py`:
+Create a file named `config.py` in the root directory:
 ```python
 # Reddit API Credentials
 REDDIT_CLIENT_ID = "your_client_id_here"
@@ -53,92 +53,92 @@ REDDIT_CLIENT_SECRET = "your_client_secret_here"
 REDDIT_USER_AGENT = "VideoBot/1.0 by YourUsername"
 ```
 
-### 6. Add Background Video
-- Place your gameplay video as `background.mp4` in the project folder
-- Or modify the `BACKGROUND_VIDEO_PATH` in the script
-- also create  output_videos folder in same directory
+### 6. Prepare Assets
+* Place your gameplay video as `background.mp4` in the project folder.
+* Alternatively, modify `BACKGROUND_VIDEO_PATH` in the script.
+* Ensure an `output_videos` folder exists in the same directory.
+
 ### 7. Run the Generator
 ```bash
 python reddit_video_generator.py
 ```
 
 ## Project Structure
-```
+```text
 reddit-video-generator/
-├── reddit_video_generator.py    # Main script
-├── config.py                    # API credentials (you create this)
-├── background.mp4              # Your background video
-├── requirements.txt            # Dependencies
-├── .gitignore                  # Git ignore rules
-├── README.md                   # This guide
-├── output_videos/              # Generated videos (auto-created)
-├── temp_audio/                 # Temporary audio files (auto-created)
-└── processed_posts.db          # Tracks processed posts (auto-created)
+├── reddit_video_generator.py    # Main execution script
+├── config.py                    # API credentials (User created)
+├── background.mp4               # Source background video
+├── requirements.txt             # Project dependencies
+├── .gitignore                   # Git exclusion rules
+├── README.md                    # Documentation
+├── output_videos/               # Final generated videos
+├── temp_audio/                  # Intermediate audio files
+└── processed_posts.db           # SQLite database for tracking
 ```
 
 ## Usage Examples
 
-### Generate 3 AITA Videos
+### Generate Multiple Videos
 ```python
 subreddit = "AmItheAsshole"
 num_videos = 3
 ```
 
 ### Popular Subreddits for Stories
-- `AmItheAsshole` - Relationship/moral dilemmas
-- `relationship_advice` - Dating/relationship issues  
-- `tifu` - "Today I F***ed Up" stories
-- `EntitledPeople` - Karen/entitled behavior
-- `MaliciousCompliance` - Revenge stories
-- `ProRevenge` - Epic revenge tales
-- `relationship_advice` - Dating advice
-- `offmychest` - Personal confessions
+* `AmItheAsshole` - Relationship and moral dilemmas
+* `relationship_advice` - Dating and relationship issues  
+* `tifu` - "Today I F***ed Up" stories
+* `EntitledPeople` - Karen and entitled behavior
+* `MaliciousCompliance` - Revenge stories
+* `ProRevenge` - Epic revenge tales
+* `offmychest` - Personal confessions
 
 ### Custom Settings
 ```python
-# In the script, modify these variables:
+# Modify these variables within the script:
 SUBREDDIT = "your_favorite_subreddit"
 NUM_VIDEOS = 5
-MIN_SCORE = 10  # Minimum upvotes
+MIN_SCORE = 10  # Minimum upvote threshold
 ```
 
 ## Customization
 
-### Change Voice
+### Voice Selection
 ```python
-# In create_tts_audio method, change:
-voice = "en-US-JennyNeural"  # TikTok-style female
-# Or try:
+# In the create_tts_audio method, change:
+voice = "en-US-JennyNeural"  # Standard TikTok-style female
+# Alternative options:
 voice = "en-US-AriaNeural"   # Different female voice
 voice = "en-US-GuyNeural"    # Male voice
 ```
 
 ### Adjust Text Timing
 ```python
-# In estimate_word_timings method:
+# In the estimate_word_timings method:
 base_rate = 2.2  # Increase for faster speech, decrease for slower
 ```
 
 ### Video Dimensions
 ```python
-# Change video size:
-self.video_width = 720   # 1080 for higher quality
-self.video_height = 1280 # 1920 for higher quality
+# Modify video resolution:
+self.video_width = 720   # Use 1080 for higher quality
+self.video_height = 1280 # Use 1920 for higher quality
 ```
 
 ### Text Styling
 ```python
 # In create_dynamic_text_clips:
 fontsize=54,        # Text size
-color='yellow',     # Text color (try 'white', 'cyan', 'lime')
+color='yellow',     # Text color (e.g., 'white', 'cyan', 'lime')
 stroke_width=4      # Border thickness
 ```
 
 ## Database Management
 
 ### Check Processed Posts
-The script automatically shows:
-```
+The script provides automatic feedback on processed content in the console:
+```text
 Database contains 15 processed posts
 Recent processed posts:
   1. AITA for telling my sister she's wrong...
@@ -146,14 +146,13 @@ Recent processed posts:
   3. AITA for not inviting my ex to my wedding...
 ```
 
-### Clear Database (Allow Reprocessing)
-Uncomment this line in the script:
+### Clear Database
+To allow reprocessing of older posts, uncomment this line in the script:
 ```python
 generator.clear_database()  # Uncomment to reprocess old posts
 ```
 
-git push origin main
-```
+*(Note: Don't forget to push your changes to your repository using `git push origin main`)*
 
 ## Troubleshooting
 
@@ -163,73 +162,73 @@ pip install praw
 ```
 
 ### "Reddit API authentication failed"
-- Double-check your `config.py` credentials
-- Make sure Reddit app is set to "Script" type
-- Verify Client ID and Secret are correct
+* Verify your `config.py` credentials.
+* Ensure your Reddit app is configured as a "Script" type.
+* Double-check the accuracy of your Client ID and Secret.
 
 ### "Background video not found"
-- Place `background.mp4` in the project folder
-- Or update `BACKGROUND_VIDEO_PATH` in the script
+* Confirm `background.mp4` is located in the root project folder.
+* Verify the `BACKGROUND_VIDEO_PATH` variable in the script.
 
-### Videos are too quiet/loud
+### Audio Levels (Too Quiet / Loud)
 ```python
 # Adjust audio volume in create_tts_audio:
-audio_clip = audio_clip.volumex(1.2)  # Increase volume
+audio_clip = audio_clip.volumex(1.2)  # Increase volume multiplier
 ```
 
-### Text appears too fast/slow
+### Text Timing (Too Fast / Slow)
 ```python
-# In estimate_word_timings, adjust:
+# In estimate_word_timings, adjust the base rate:
 base_rate = 2.0  # Slower speech
 base_rate = 2.5  # Faster speech
 ```
 
-### Out of memory errors
-- Use shorter background videos (5-10 minutes max)
-- Reduce video resolution in settings
-- Close other applications while processing
+### Out of Memory Errors
+* Use shorter background videos (5-10 minutes maximum).
+* Reduce the video resolution settings.
+* Close unused background applications while processing.
 
 ## Legal Notes
 
-- Reddit Content: Public posts are generally fair use for commentary
-- Background Videos: Use your own gameplay or royalty-free footage
-- TTS Voice: Edge TTS is free for personal use
-- Copyright: Always respect content creators and Reddit's terms
+* **Reddit Content:** Public posts are generally considered fair use for commentary purposes.
+* **Background Videos:** Always use your own gameplay or royalty-free footage.
+* **TTS Voice:** Edge TTS is intended for personal use.
+* **Copyright:** Respect content creators and strictly adhere to Reddit's Terms of Service.
 
 ## Support
 
-Having issues? Common solutions:
-1. **Update dependencies**: `pip install --upgrade -r requirements.txt`
-2. **Clear cache**: Delete `__pycache__` folders
-3. **Reset database**: Uncomment `generator.clear_database()`
-4. **Check logs**: Look for error messages in console output
+If you encounter persistent issues, try these common solutions:
+1. **Update dependencies:** Run `pip install --upgrade -r requirements.txt`
+2. **Clear cache:** Delete any `__pycache__` folders in the directory.
+3. **Reset database:** Uncomment `generator.clear_database()` in the script.
+4. **Check logs:** Review the console output for specific error tracebacks.
 
 ---
 
 ## Pro Tips for Viral Content
 
 ### Story Selection
-- **High engagement**: 100+ upvotes minimum
-- **Recent posts**: Fresh content performs better  
-- **Dramatic titles**: "AITA for ruining my sister's wedding?"
-- **Cliffhangers**: Stories with plot twists
+* **High engagement:** Target a minimum of 100+ upvotes.
+* **Recent posts:** Fresh, trending content performs best.
+* **Dramatic titles:** Look for strong hooks (e.g., "AITA for ruining my sister's wedding?").
+* **Cliffhangers:** Prioritize stories with plot twists.
 
 ### Video Optimization
-- **9:16 aspect ratio**: Perfect for mobile viewing
-- **Clear audio**: Jenny Neural voice is already optimized
-- **Readable text**: Yellow text with black outline pops
-- **Background**: Subtle gameplay that doesn't distract
+* **9:16 aspect ratio:** Perfectly scaled for mobile viewing.
+* **Clear audio:** The Jenny Neural voice is natively optimized for this format.
+* **Readable text:** High-contrast yellow text with a black outline maximizes retention.
+* **Background:** Keep gameplay subtle so it doesn't distract from the narrative.
 
 ### Engagement Boosters
-- **Ask questions**: "Team bride or team sister?"
-- **Create polls**: Use TikTok's poll feature
-- **Series format**: "Part 1 of 3" keeps viewers coming back
-- **Cliffhangers**: End with "Wait until you hear what happens next..."
+* **Ask questions:** Prompt the audience (e.g., "Team bride or team sister?").
+* **Create polls:** Leverage native TikTok/Shorts poll features.
+* **Series format:** Divide longer stories into "Part 1 of X" to build a returning audience.
+* **Cliffhangers:** Conclude with "Wait until you hear what happens next...".
 
 ### Content Calendar
-- **Monday**: Fresh AITA posts from weekend drama
-- **Wednesday**: Workplace/school stories  
-- **Friday**: Relationship/dating content
-- **Sunday**: Family drama stories
+* **Monday:** Fresh AITA posts covering weekend drama.
+* **Wednesday:** Relatable workplace or school stories.
+* **Friday:** Relationship and dating content.
+* **Sunday:** Family dynamics and drama stories.
 
 Start creating viral Reddit story videos now!
